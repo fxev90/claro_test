@@ -26,3 +26,16 @@ Route::group([
     Route::delete('{id}/permanent-delete', [\App\Http\Controllers\API\StudentController::class, 'permanentDelete']);
 });
 /*=====  End of students   ======*/
+
+/*===========================
+=           courses           =
+=============================*/
+
+Route::apiResource('/courses', \App\Http\Controllers\API\CourseController::class);
+Route::group([
+   'prefix' => 'courses',
+], function() {
+    Route::get('{id}/restore', [\App\Http\Controllers\API\CourseController::class, 'restore']);
+    Route::delete('{id}/permanent-delete', [\App\Http\Controllers\API\CourseController::class, 'permanentDelete']);
+});
+/*=====  End of courses   ======*/
