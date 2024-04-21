@@ -12,10 +12,12 @@ class AuthenticationController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|min:3|max:50',
-            'apellido' => 'required|string|min:3|max:50',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:8',
+            'nombre' => 'required|string|max:100',
+            'apellido' => 'required|string|max:100',
+            'email' => 'required|string|email|unique:administrators,email',
+            'password' => 'required|string|min:8|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+        ], [
+            'password.regex' => 'La contraseña debe contener al menos un número, una letra mayúscula, un carácter especial.',
         ]);
 
         if ($validator->fails()) {

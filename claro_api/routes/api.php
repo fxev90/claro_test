@@ -13,3 +13,16 @@ Route::group(['namespace'=>'App\Http\Controllers\Api'], function(){
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*===========================
+=           students           =
+=============================*/
+
+Route::apiResource('/students', \App\Http\Controllers\API\StudentController::class);
+Route::group([
+   'prefix' => 'students',
+], function() {
+    Route::get('{id}/restore', [\App\Http\Controllers\API\StudentController::class, 'restore']);
+    Route::delete('{id}/permanent-delete', [\App\Http\Controllers\API\StudentController::class, 'permanentDelete']);
+});
+/*=====  End of students   ======*/
