@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseStudentController;
 
 Route::group(['namespace'=>'App\Http\Controllers\Api'], function(){
     Route::group(['prefix'=>'auth'], function () {
@@ -39,3 +40,5 @@ Route::group([
     Route::delete('{id}/permanent-delete', [\App\Http\Controllers\API\CourseController::class, 'permanentDelete']);
 });
 /*=====  End of courses   ======*/
+
+Route::post('/courses/{course}/students/{student}', [CourseStudentController::class, 'enrollStudent']);

@@ -30,6 +30,10 @@ class Student extends Model
         'edad' => 'integer',
     ];
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
 
 
 }

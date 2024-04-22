@@ -34,5 +34,10 @@ class Course extends Model
         'fecha_fin' => 'date',
     ];
 
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
+    }
+
 
 }
