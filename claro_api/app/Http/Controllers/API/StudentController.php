@@ -20,7 +20,7 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students = Student::dynamicPaginate();
+        $students = Student::with('courses')->dynamicPaginate();
 
         return $students;
     }
