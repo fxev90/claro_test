@@ -42,3 +42,5 @@ Route::group([
 /*=====  End of courses   ======*/
 
 Route::post('/courses/{course}/students/{student}', [CourseStudentController::class, 'enrollStudent']);
+Route::get('/top-courses', [CourseStudentController::class, 'topCourses']);
+Route::get('/top-students', [CourseStudentController::class, 'topStudents']);
