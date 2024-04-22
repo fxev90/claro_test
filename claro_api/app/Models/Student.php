@@ -34,6 +34,20 @@ class Student extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+        // Override the route key name for route model binding
+        public function resolveRouteBinding($value, $field = null)
+        {
+            // Try to find a student by email
+            $student = $this->where('id', $value)->first();
+    
+            // If no student is found by email, try to find by cedula
+            if (!$student) {
+                $student = $this->where('cedula', $value)->first();
+            }
+    
+            // Return the found student or null
+            return $student;
+        }
 
 
 }
