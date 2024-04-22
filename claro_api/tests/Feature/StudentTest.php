@@ -55,7 +55,7 @@ class StudentTest extends TestCase
     public function testViewAllStudentsSuccessfully(): void
     {
 
-        //$this->actingAs(User::factory()->create());
+
 
         $estudiantes = Student::factory(5)->create();
 
@@ -75,7 +75,7 @@ class StudentTest extends TestCase
     public function testsCreateStudentValidation(): void
     {
 
-        //$this->actingAs(User::factory()->create());
+
 
         $data = [];
 
@@ -122,7 +122,7 @@ class StudentTest extends TestCase
     public function testViewStudentData(): void
     {
 
-        //$this->actingAs(User::factory()->create());
+
 
         $estudiante = Student::factory()->create();
 
@@ -141,7 +141,7 @@ class StudentTest extends TestCase
 
     public function testUpdateStudent(): void
     {
-        $this->actingAs(User::factory()->create());
+
         $estudiante = Student::factory()->create();
     
         $payload = [
@@ -190,7 +190,7 @@ class StudentTest extends TestCase
 
     public function testDeleteStudent(): void
     {
-        $this->actingAs(User::factory()->create());
+
         $estudiante = Student::factory()->create();
 
         $this->json('DELETE', $this->endpoint . '/' . $estudiante->id)
@@ -206,7 +206,7 @@ class StudentTest extends TestCase
     {
         $this->markTestIncomplete('This test case needs review.');
 
-        $this->actingAs(User::factory()->create());
+
 
         Student::factory()->create();
 
@@ -226,7 +226,6 @@ class StudentTest extends TestCase
     {
         $this->markTestIncomplete('This test case needs review.');
 
-        $this->actingAs(User::factory()->create());
 
         Student::factory()->create();
 
