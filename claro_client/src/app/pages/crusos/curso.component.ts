@@ -33,6 +33,7 @@ interface ApiResponse {
 })
 export class CursoComponent {
     public currentPageData: Course[] = [];
+    totalItems: number = 0;
     links: { url: string | null; label: string; active: boolean; }[] = [];
     showCreateModal = false;
     showEditModal = false;
@@ -55,6 +56,7 @@ export class CursoComponent {
     loadData(url: string): void {
         this.http.get<ApiResponse>(url).subscribe((response) => {
             this.currentPageData = response.data;
+            this.totalItems = response.total;
             this.links = response.links;
         });
     }
