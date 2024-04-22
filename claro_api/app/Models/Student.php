@@ -30,18 +30,6 @@ class Student extends Model
         'edad' => 'integer',
     ];
 
-    /**
-     * The rules that govern the validation of the model.
-     *
-     * @var array
-     */
-    public static $rules = [
-        'nombre' => 'required|max:100',
-        'apellido' => 'nullable|max:100',
-        'edad' => 'required|integer|min:18',
-        'cedula' => 'required|max:11',
-        'email' => 'required|email|unique:estudiantes',
-    ];
 
 
 }
