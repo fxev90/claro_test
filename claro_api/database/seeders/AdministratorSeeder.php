@@ -14,6 +14,6 @@ class AdministratorSeeder extends Seeder
      */
     public function run(): void
     {
-        Administrator::factory(10)->create();
+        Administrator::factory(1)->create();
     }
 }
