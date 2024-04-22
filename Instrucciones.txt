@@ -1,0 +1,2 @@
+.Credenciales de preuba para login estan en el factory de al administrador
+usar la configuracion de apache 
