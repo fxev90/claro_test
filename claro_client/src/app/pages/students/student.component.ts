@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { AppService } from '@services/app.service';
 
 interface Student {
     id?: number;
@@ -69,10 +70,10 @@ export class StudentsComponent {
         courses: [],
     };
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private appService: AppService) { }
 
     ngOnInit(): void {
-        this.loadData('http://claro_api.test/api/students?page=1');
+        this.loadData(`${this.appService.apiUrl}/students?page=1`);
     }
 
     loadData(url: string): void {
@@ -84,11 +85,11 @@ export class StudentsComponent {
     }
 
     createStudent(): void {
-        this.http.post<Student>('http://claro_api.test/api/students', this.selectedStudent)
+        this.http.post<Student>(`${this.appService.apiUrl}/students`, this.selectedStudent)
             .subscribe((student) => {
                 this.currentPageData.push(student);
                 this.closeModal();
-                this.loadData('http://claro_api.test/api/students?page=1');
+                this.loadData(`${this.appService.apiUrl}/students?page=1`);
             });
     }
 
@@ -99,18 +100,18 @@ export class StudentsComponent {
 
     updateStudent(): void {
         if (this.selectedStudent.id) {
-            this.http.put<Student>(`http://claro_api.test/api/students/${this.selectedStudent.id}`, this.selectedStudent)
+            this.http.put<Student>(`${this.appService.apiUrl}/students/${this.selectedStudent.id}`, this.selectedStudent)
                 .subscribe((updatedStudent) => {
                     const index = this.currentPageData.findIndex((s) => s.id === updatedStudent.id);
                     this.currentPageData[index] = updatedStudent;
                     this.closeModal();
-                    this.loadData('http://claro_api.test/api/students?page=1');
+                    this.loadData(`${this.appService.apiUrl}/students?page=1`);
                 });
         }
     }
 
     deleteStudent(id: number): void {
-        this.http.delete(`http://claro_api.test/api/students/${id}`)
+        this.http.delete(`${this.appService.apiUrl}/students/${id}`)
             .subscribe(() => {
                 this.currentPageData = this.currentPageData.filter((s) => s.id !== id);
             });

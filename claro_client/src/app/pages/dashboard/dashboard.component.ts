@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AppService } from '@services/app.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -10,7 +11,7 @@ export class DashboardComponent implements OnInit {
     topCourses: any[] = [];
     topStudents: any[] = [];
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private appService: AppService) { }
 
     ngOnInit() {
         this.fetchTopCourses();
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
     }
 
     fetchTopCourses() {
-        this.http.get<any>('http://claro_api.test/api/top-courses')
+        this.http.get<any>(`${this.appService.apiUrl}/top-courses`)
             .subscribe(
                 response => {
                     this.topCourses = response.data;
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
     }
 
     fetchTopStudents() {
-        this.http.get<any>('http://claro_api.test/api/top-students')
+        this.http.get<any>(`${this.appService.apiUrl}/top-students`)
             .subscribe(
                 response => {
                     this.topStudents = response.data;

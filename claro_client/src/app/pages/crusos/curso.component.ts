@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { AppService } from '@services/app.service';
 
 interface Course {
     id?: number;
@@ -47,10 +48,10 @@ export class CursoComponent {
     };
     studentCedula: string = '';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private appService: AppService,) { }
 
     ngOnInit(): void {
-        this.loadData('http://claro_api.test/api/courses?page=1');
+        this.loadData(`${this.appService.apiUrl}/courses?page=1`);
     }
 
     loadData(url: string): void {
@@ -63,12 +64,12 @@ export class CursoComponent {
 
     createCourse(): void {
         this.http
-            .post<Course>('http://claro_api.test/api/courses', this.selectedCourse)
+            .post<Course>(`${this.appService.apiUrl}/courses`, this.selectedCourse)
             .subscribe((course) => {
                 this.currentPageData.push(course);
                 this.addStudentToCourse(course.id);
                 this.closeModal();
-                this.loadData('http://claro_api.test/api/courses?page=1');
+                this.loadData(`${this.appService.apiUrl}/courses?page=1`);
             });
     }
 
@@ -84,19 +85,19 @@ export class CursoComponent {
     updateCourse(): void {
         if (this.selectedCourse.id) {
             this.http
-                .put<Course>(`http://claro_api.test/api/courses/${this.selectedCourse.id}`, this.selectedCourse)
+                .put<Course>(`${this.appService.apiUrl}/courses/${this.selectedCourse.id}`, this.selectedCourse)
                 .subscribe((updatedCourse) => {
                     const index = this.currentPageData.findIndex((c) => c.id === updatedCourse.id);
                     this.currentPageData[index] = updatedCourse;
                     this.addStudentToCourse(updatedCourse.id);
                     this.closeModal();
-                    this.loadData('http://claro_api.test/api/courses?page=1');
+                    this.loadData(`${this.appService.apiUrl}/courses?page=1`);
                 });
         }
     }
 
     deleteCourse(id: number): void {
-        this.http.delete(`http://claro_api.test/api/courses/${id}`).subscribe(() => {
+        this.http.delete(`${this.appService.apiUrl}/courses/${id}`).subscribe(() => {
             this.currentPageData = this.currentPageData.filter((c) => c.id !== id);
         });
     }
@@ -115,7 +116,7 @@ export class CursoComponent {
     addStudentToCourse(courseId: number): void {
         if (this.studentCedula) {
             this.http
-                .post(`http://claro_api.test/api/courses/${courseId}/students/${this.studentCedula}`, null)
+                .post(`${this.appService.apiUrl}/courses/${courseId}/students/${this.studentCedula}`, null)
                 .subscribe(
                     () => {
                         console.log('Student added to course successfully');

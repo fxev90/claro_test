@@ -27,7 +27,7 @@ interface User {
 
 export class AppService {
     public user: any = null;
-    private apiUrl = 'http://claro_api.test/api'
+    public apiUrl = 'http://claro_api.test/api'
     constructor(private router: Router, private toastr: ToastrService, private http: HttpClient) {}
 
     async loginByAuth({email, password}) {

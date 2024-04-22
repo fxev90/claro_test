@@ -1,2 +1,3 @@
 .Credenciales de preuba para login estan en el factory de al administrador
 usar la configuracion de apache 
+Para ajustar la url de angular ir a claro_client\src\app\services\app.service.ts apiUrl 
